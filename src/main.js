@@ -8,6 +8,7 @@ import router from './router'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vuetify from 'vuetify'
+import store from './store'
 
 // CSS
 import 'vuetify/dist/vuetify.min.css'
@@ -20,7 +21,7 @@ Vue.use(BootstrapVue)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
+  router, store,
   components: { App },
   template: '<App/>',
   created () {
@@ -31,5 +32,10 @@ new Vue({
       projectId: 'mevn-chat',
       storageBucket: 'mevn-chat.appspot.com',
     })
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.dispatch('autoSignIn', user)
+      }
+    })    
   }
 })

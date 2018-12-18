@@ -5,6 +5,7 @@ import AddRoom from '@/components/AddRoom'
 import JoinRoom from '@/components/JoinRoom'
 import ChatRoom from '@/components/ChatRoom'
 import Signup from '@/components/Signup'
+import Login from '@/components/Login'
 
 Vue.use(Router)
 
@@ -26,7 +27,7 @@ export default new Router({
       component: JoinRoom
     },
     {
-      path: '/sign-up',
+      path: '/Signup',
       name: 'Signup',
       component: Signup
     },    
@@ -34,6 +35,11 @@ export default new Router({
       path: '/chat-room/:id/:nickname',
       name: 'ChatRoom',
       component: ChatRoom
+    },
+    {
+      path: '/Login',
+      name: 'Login',
+      component: Login
     }
   ]
 })
