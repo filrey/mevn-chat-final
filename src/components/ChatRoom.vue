@@ -2,11 +2,22 @@
   <v-layout>
     <v-flex>
       <v-card>
+        <ul v-if="errors && errors.length">
+          <li v-for="error of errors" :key="error.id">
+            <v-alert
+            :value="true"
+            type="error"
+            >
+            {{error.message}}
+            </v-alert>
+            {{error.message}}
+          </li>
+        </ul>
         <h2>
           Chat Room - <b-btn size="sm" @click.stop="logout()">Leave Room</b-btn>
         </h2>
         <v-list two-line class="panel-body" v-chat-scroll>
-          <template v-for="(item, index) in chats">
+          <template v-for="(item, index) in chats" v-if="item.room == roomId">
             <v-list-tile :key="index" avatar ripple>
               <v-list-tile-content v-if="item.nickname === nickname">
                 <v-list-tile-title>
@@ -27,19 +38,16 @@
             <v-divider v-if="index + 1 < chats.length" :key="`divider-${index}`"></v-divider>
           </template>
         </v-list>
-        <ul v-if="errors && errors.length">
-          <li v-for="error of errors" :key="error.id">
-            {{error.message}}
-          </li>
-        </ul>
-        <b-form @submit="onSubmit" class="chat-form">
-          <b-input-group prepend="Message">
-            <b-form-input id="message" :state="state" v-model.trim="chat.message"></b-form-input>
-            <b-input-group-append>
-              <b-btn type="submit" variant="info">Send</b-btn>
-            </b-input-group-append>
-          </b-input-group>
-        </b-form>
+        <v-container>
+          <v-form @submit="onSubmit">
+            <v-text-field
+              v-model="chat.message"
+              label="Message"
+              required
+            ></v-text-field>
+            <v-btn type="submit" color="primary">Send</v-btn>
+          </v-form>
+        </v-container>
         <v-spacer></v-spacer>
       </v-card>
     </v-flex>
