@@ -21,30 +21,30 @@
   </v-layout>
 </template>
 
- <script>
-   export default {
-     data () {
-       return {
-         email: '',
-         password: ''
-       }
-     },
-     computed: {
-       user () {
-         return this.$store.getters.user
-       }
-     },
-     watch: {
-       user (value) {
-         if (value !== null && value !== undefined) {
-           this.$router.push('/')
-         }
-       }
-     },
-     methods: {
-       onSignin () {
-         this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
-       }
-     }
-   }
- </script>
+<script>
+export default {
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.getters.user
+    }
+  },
+  watch: {
+    user (value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push('/')
+      }
+    }
+  },
+  methods: {
+    onSignin () {
+      this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
+    }
+  }
+}
+</script>

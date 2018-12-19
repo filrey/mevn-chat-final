@@ -21,7 +21,8 @@ Vue.use(BootstrapVue)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router, store,
+  router,
+  store,
   components: { App },
   template: '<App/>',
   created () {
@@ -30,12 +31,12 @@ new Vue({
       authDomain: 'mevn-chat.firebaseapp.com',
       databaseURL: 'https://mevn-chat.firebaseio.com',
       projectId: 'mevn-chat',
-      storageBucket: 'mevn-chat.appspot.com',
+      storageBucket: 'mevn-chat.appspot.com'
     })
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.dispatch('autoSignIn', user)
       }
-    })    
+    })
   }
 })

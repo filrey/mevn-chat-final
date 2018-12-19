@@ -16,7 +16,7 @@
           </template>
         </v-data-table>
         <ul v-if="errors && errors.length">
-          <li v-for="error of errors" :key="error.id"> 
+          <li v-for="error of errors" :key="error.id">
             {{error.message}}
           </li>
         </ul>
@@ -43,33 +43,33 @@ export default {
       rooms: [],
       errors: [],
       headers: [
-      {
-        text: 'Room Name',
-        align: 'left',
-        sortable: false,
-        value: 'name'
-      },
-      { text: 'Created Date',
-       align: 'center',
-       sortable: false,
-       value: 'createdDate'
-      },
-      { text: 'Action', 
-      align: 'right',
-      sortable: false, 
-      value: 'action' 
-      },
-      ],
+        {
+          text: 'Room Name',
+          align: 'left',
+          sortable: false,
+          value: 'name'
+        },
+        { text: 'Created Date',
+          align: 'center',
+          sortable: false,
+          value: 'createdDate'
+        },
+        { text: 'Action',
+          align: 'right',
+          sortable: false,
+          value: 'action'
+        }
+      ]
     }
   },
   created () {
     axios.get(`http://localhost:3000/api/room`)
-    .then(response => {
-      this.rooms = response.data
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
+      .then(response => {
+        this.rooms = response.data
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
   },
   methods: {
     join (id) {
@@ -82,11 +82,11 @@ export default {
   },
   computed: {
     user () {
-        return this.$store.getters.user
-    },            
+      return this.$store.getters.user
+    },
     userIsAuthenticated () {
-    return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+      return this.$store.getters.user !== null && this.$store.getters.user !== undefined
     }
-  },
+  }
 }
 </script>

@@ -9,8 +9,8 @@
       app
     >
       <v-list dense>
-        <v-list-tile 
-        v-for="item in menuItems" 
+        <v-list-tile
+        v-for="item in menuItems"
         :key="item.title"
         router
         :to="item.link">
@@ -36,7 +36,7 @@
         <router-link to="/" tag="span" style="cursor: pointer">
       <v-toolbar-title>
         Mevn-Chat</v-toolbar-title>
-        
+
         </router-link>
     </v-toolbar>
     <v-content>
@@ -58,42 +58,42 @@
 </template>
 
 <script>
-  export default {
-    name: 'App',
-    data() {
-      return {
-        drawer:null,
-      }
-    },
-    computed: {
-      menuItems () {
-        let menuItems = [
-          {icon: 'face', title: 'Sign up', link: '/Signup'},
-          {icon: 'lock_open', title: 'Login', link: '/Login'}  
-        ]
-        if (this.userIsAuthenticated) {
-          menuItems = [
-            {icon: 'room', title: 'Room List', link: '/'},
-            {icon: 'add_box', title: 'Add Room', link: '/add-room'}
-          ]
-        }
-        return menuItems
-      },
-      userIsAuthenticated () {
-        return this.$store.getters.user !== null && this.$store.getters.user !== undefined
-      }
-      
-    },
-    methods: {
-      onLogout () {
-        this.$store.dispatch('logout')
-        this.$router.push('/Login')
-      }
-    },    
-    props: {
-      source: String
+export default {
+  name: 'App',
+  data () {
+    return {
+      drawer: null
     }
+  },
+  computed: {
+    menuItems () {
+      let menuItems = [
+        {icon: 'face', title: 'Sign up', link: '/Signup'},
+        {icon: 'lock_open', title: 'Login', link: '/Login'}
+      ]
+      if (this.userIsAuthenticated) {
+        menuItems = [
+          {icon: 'room', title: 'Room List', link: '/'},
+          {icon: 'add_box', title: 'Add Room', link: '/add-room'}
+        ]
+      }
+      return menuItems
+    },
+    userIsAuthenticated () {
+      return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+    }
+
+  },
+  methods: {
+    onLogout () {
+      this.$store.dispatch('logout')
+      this.$router.push('/Login')
+    }
+  },
+  props: {
+    source: String
   }
+}
 </script>
 
 <style lang="scss">

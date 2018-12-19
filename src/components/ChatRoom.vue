@@ -33,7 +33,7 @@
                   <p class="text-xs-right">{{ item.nickname }}</p></v-list-tile-title>
                 <v-list-tile-sub-title class="text--primary"><p class="text-xs-right">{{ item.message }}</p></v-list-tile-sub-title>
                 <v-list-tile-sub-title><p class="text-xs-right">{{ item.created_date }}</p></v-list-tile-sub-title>
-              </v-list-tile-content>                  
+              </v-list-tile-content>
             </v-list-tile>
             <v-divider v-if="index + 1 < chats.length" :key="`divider-${index}`"></v-divider>
           </template>
@@ -76,24 +76,24 @@ export default {
   },
   created () {
     axios.get(`http://localhost:3000/api/chat/`)
-    .then(response => {
-        console.log("Response data from: http://localhost:3000/api/chat/")
+      .then(response => {
+        console.log('Response data from: http://localhost:3000/api/chat/')
         console.log(response)
-      this.chats = response.data
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
+        this.chats = response.data
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
 
     this.socket.on('new-message', function (data) {
-      if(data.message.room === this.$route.params.id) {
+      if (data.message.room === this.$route.params.id) {
         this.chats.push(data.message)
       }
     }.bind(this))
   },
   methods: {
     logout () {
-      this.socket.emit('save-message', { room: this.chat.room, nickname: this.chat.nickname, message: this.chat.nickname + ' left this room', created_date: new Date() });
+      this.socket.emit('save-message', { room: this.chat.room, nickname: this.chat.nickname, message: this.chat.nickname + ' left this room', created_date: new Date() })
       this.$router.push({
         name: 'RoomList'
       })
@@ -103,13 +103,13 @@ export default {
       this.chat.room = this.$route.params.id
       this.chat.nickname = this.$route.params.nickname
       axios.post(`http://localhost:3000/api/chat`, this.chat)
-      .then(response => {
-        this.socket.emit('save-message', response.data)
-        this.chat.message = ''
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
+        .then(response => {
+          this.socket.emit('save-message', response.data)
+          this.chat.message = ''
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
     }
   }
 }

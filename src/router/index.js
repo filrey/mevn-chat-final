@@ -30,7 +30,7 @@ export default new Router({
       path: '/Signup',
       name: 'Signup',
       component: Signup
-    },    
+    },
     {
       path: '/chat-room/:id/:nickname',
       name: 'ChatRoom',
