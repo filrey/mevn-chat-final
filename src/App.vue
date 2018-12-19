@@ -31,7 +31,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="blue-grey" dark fixed app>
+    <v-toolbar color="blue" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <router-link to="/" tag="span" style="cursor: pointer">
       <v-toolbar-title>

@@ -6,16 +6,14 @@
         Add Room
         <b-link href="#/">(Room List)</b-link>
       </h2>
-      <b-form @submit="onSubmit">
-        <b-form-group id="fieldsetHorizontal"
-                  horizontal
-                  :label-cols="4"
-                  breakpoint="md"
-                  label="Enter Room Name">
-          <b-form-input id="room_name" :state="state" v-model.trim="room.room_name"></b-form-input>
-        </b-form-group>
-        <b-button type="submit" variant="primary">Save</b-button>
-      </b-form>
+      <v-form @submit="onSubmit">
+        <v-text-field
+          v-model="room.room_name"
+          label="Enter Room Name"
+          required
+        ></v-text-field>
+        <v-btn type="submit" color="primary">Create</v-btn>
+      </v-form>
     </b-col>
     <b-col align-self="end">&nbsp;</b-col>
   </b-row>

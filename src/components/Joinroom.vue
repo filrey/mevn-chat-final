@@ -6,16 +6,14 @@
         Join Room
         <b-link href="#/">(Room List)</b-link>
       </h2>
-      <b-form @submit="onSubmit">
-        <b-form-group id="fieldsetHorizontal"
-                  horizontal
-                  :label-cols="4"
-                  breakpoint="md"
-                  label="Enter Nickname">
-          <b-form-input id="nickname" :state="state" v-model.trim="chat.nickname"></b-form-input>
-        </b-form-group>
-        <b-button type="submit" variant="primary">Join</b-button>
-      </b-form>
+      <v-form @submit="onSubmit">
+        <v-text-field
+          v-model="chat.nickname"
+          label="Enter Nickname"
+          required
+        ></v-text-field>
+        <v-btn type="submit" color="primary">Join</v-btn>
+    </v-form>
     </b-col>
     <b-col align-self="end">&nbsp;</b-col>
   </b-row>
