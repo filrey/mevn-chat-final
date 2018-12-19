@@ -3,12 +3,7 @@
     <b-row v-if="this.userIsAuthenticated">
       <b-col cols="12">
         <h1 v-if="user.data.email !== null">Welcome back {{user.data.email}}</h1>
-        <h2>
-          Room List
-          <b-link href="#/add-room">(Add Room)</b-link>
-          <b-link href="#/sign-up">(Sign Up)</b-link>
-
-        </h2>
+        <h2>Room List</h2>
         <b-table striped hover :items="rooms" :fields="fields">
           <template slot="actions" scope="row">
             <b-btn size="sm" @click.stop="join(row.item._id)">Join</b-btn>

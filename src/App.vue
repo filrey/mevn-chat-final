@@ -46,7 +46,6 @@
           align-center
         >
           <v-flex text-xs-center>
-            <img src="./assets/logo.png">
             <router-view></router-view>
           </v-flex>
         </v-layout>
@@ -74,7 +73,8 @@
         ]
         if (this.userIsAuthenticated) {
           menuItems = [
-            {icon: 'room', title: 'Room List', link: '/'}
+            {icon: 'room', title: 'Room List', link: '/'},
+            {icon: 'add_box', title: 'Add Room', link: '/add-room'}
           ]
         }
         return menuItems
