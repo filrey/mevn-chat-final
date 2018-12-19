@@ -1,50 +1,49 @@
 <template>
-  <b-row>
-    <b-col cols="12">
-      <h2>
-        Chat Room - <b-btn size="sm" @click.stop="logout()">Logout</b-btn>
-      </h2>
-      <b-list-group class="panel-body" v-chat-scroll>
-          <div v-for="item in chats" :key="item.id">
-            <b-list-group-item v-if="item.room == roomId" class="chat">
-                    <div class="left clearfix" v-if="item.nickname === nickname">
-                        <b-img left src="http://placehold.it/50/55C1E7/fff&text=ME" rounded="circle" width="75" height="75" alt="img" class="m-1" />
-                        <div class="chat-body clearfix">
-                        <div class="header">
-                            <strong class="primary-font">{{ item.nickname }}</strong> <small class="pull-right text-muted">
-                            <span class="glyphicon glyphicon-time"></span>{{ item.created_date }}</small>
-                        </div>
-                        <p>{{ item.message }}</p>
-                        </div>
-                    </div>
-                    <div class="right clearfix" v-else>
-                        <b-img right src="http://placehold.it/50/55C1E7/fff&text=U" rounded="circle" width="75" height="75" alt="img" class="m-1" />
-                        <div class="chat-body clearfix">
-                        <div class="header">
-                            <strong class="primary-font">{{ item.nickname }}</strong> <small class="pull-right text-muted">
-                            <span class="glyphicon glyphicon-time"></span>{{ item.created_date }}</small>
-                        </div>
-                        <p>{{ item.message }}</p>
-                        </div>
-                    </div>
-            </b-list-group-item>
-          </div>
-      </b-list-group>
-      <ul v-if="errors && errors.length">
-        <li v-for="error of errors" :key="error.id">
-          {{error.message}}
-        </li>
-      </ul>
-      <b-form @submit="onSubmit" class="chat-form">
-        <b-input-group prepend="Message">
-          <b-form-input id="message" :state="state" v-model.trim="chat.message"></b-form-input>
-          <b-input-group-append>
-            <b-btn type="submit" variant="info">Send</b-btn>
-          </b-input-group-append>
-        </b-input-group>
-      </b-form>
-    </b-col>
-  </b-row>
+  <v-layout>
+    <v-flex>
+      <v-card>
+        <h2>
+          Chat Room - <b-btn size="sm" @click.stop="logout()">Leave Room</b-btn>
+        </h2>
+        <v-list two-line class="panel-body" v-chat-scroll>
+          <template v-for="(item, index) in chats">
+            <v-list-tile :key="index" avatar ripple>
+              <v-list-tile-content v-if="item.nickname === nickname">
+                <v-list-tile-title>
+                  <!-- <v-avatar :size="48" color="grey lighten-4"><img src="http://placehold.it/50/55C1E7/fff&text=ME" alt="avatar"></v-avatar> -->
+                  {{ item.nickname }}</v-list-tile-title>
+                <v-list-tile-sub-title class="text--primary">{{ item.message }}</v-list-tile-sub-title>
+                <v-list-tile-sub-title>{{ item.created_date }}</v-list-tile-sub-title>
+              </v-list-tile-content>
+
+              <v-list-tile-content v-else>
+                <v-list-tile-title>
+                  <!-- <v-avatar :size="48" color="grey lighten-4"><img src="http://placehold.it/50/55C1E7/fff&text=ME" alt="avatar"></v-avatar> -->
+                  <p class="text-xs-right">{{ item.nickname }}</p></v-list-tile-title>
+                <v-list-tile-sub-title class="text--primary"><p class="text-xs-right">{{ item.message }}</p></v-list-tile-sub-title>
+                <v-list-tile-sub-title><p class="text-xs-right">{{ item.created_date }}</p></v-list-tile-sub-title>
+              </v-list-tile-content>                  
+            </v-list-tile>
+            <v-divider v-if="index + 1 < chats.length" :key="`divider-${index}`"></v-divider>
+          </template>
+        </v-list>
+        <ul v-if="errors && errors.length">
+          <li v-for="error of errors" :key="error.id">
+            {{error.message}}
+          </li>
+        </ul>
+        <b-form @submit="onSubmit" class="chat-form">
+          <b-input-group prepend="Message">
+            <b-form-input id="message" :state="state" v-model.trim="chat.message"></b-form-input>
+            <b-input-group-append>
+              <b-btn type="submit" variant="info">Send</b-btn>
+            </b-input-group-append>
+          </b-input-group>
+        </b-form>
+        <v-spacer></v-spacer>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
